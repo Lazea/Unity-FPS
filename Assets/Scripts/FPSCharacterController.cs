@@ -86,10 +86,9 @@ public class FPSCharacterController : MonoBehaviour {
         RaycastHit hit = new RaycastHit();
         if (Physics.SphereCast(groundSphereRay, groundSphereRadius, out hit, groundSphereRayDistance))
         {
-            int groundLayer = LayerMask.NameToLayer("Ground");
-            int platformLayer = LayerMask.NameToLayer("DynamicPlatform");
+            int groundLayer = LayerMask.NameToLayer("Walkable");
             int hitLayer = hit.transform.gameObject.layer;
-            if (hitLayer == groundLayer || hitLayer == platformLayer)
+            if (hitLayer == groundLayer)
             {
                 isGrounded = true;
 
@@ -99,15 +98,6 @@ public class FPSCharacterController : MonoBehaviour {
                 slopeDir.Normalize();
 
                 groundSlope = Vector3.Angle(transform.up, groundContactNorm);
-            }
-
-            if (hitLayer == platformLayer)
-            {
-                transform.parent = hit.transform;
-            }
-            else
-            {
-                transform.parent = null;
             }
         }
         else
