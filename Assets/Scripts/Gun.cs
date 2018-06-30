@@ -7,9 +7,11 @@ public class Gun : MonoBehaviour {
     public int damage = 10;
 
     public Projectile projectile;
+    ObjectsPool projectilePool;
+    Transform muzzle;
 
-    public int ammoCapacity = 5;
-    int ammo = 0;
+    public int ammoCapacity = 6;
+    public int ammo = 0;
 
     public bool auto;
     public float fireRate = 0.1f;
@@ -22,8 +24,13 @@ public class Gun : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+        muzzle = transform.Find("Muzzle");
+
+        projectilePool = gameObject.AddComponent<ObjectsPool> ();
+        projectilePool.poolObject = projectile.gameObject;
+        projectilePool.poolSize = ammoCapacity;
+        projectilePool.objectSpawnPoint = muzzle;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -86,6 +93,8 @@ public class Gun : MonoBehaviour {
         reloading = false;
 
         ammo -= 1;
+        GameObject newProjectile = projectilePool.PeekNextObject();
+        newProjectile.GetComponent<PoolObject>().Activate(true);
 
         // TODO: Play fire animation
     }

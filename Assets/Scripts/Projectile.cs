@@ -30,10 +30,13 @@ public class Projectile : MonoBehaviour {
             Hit();
         }
 
-        elapsedTime += tm;
-        if(elapsedTime >= lifeTime)
+        if(lifeTime > 0)
         {
-            DestroyProjectile();
+            elapsedTime += tm;
+            if (elapsedTime >= lifeTime)
+            {
+                DestroyProjectile();
+            }
         }
 
         previousPos = transform.position;
@@ -46,6 +49,14 @@ public class Projectile : MonoBehaviour {
 
     void DestroyProjectile()
     {
-        Destroy(gameObject);
+        PoolObject poolObject = gameObject.GetComponent<PoolObject>();
+        if (poolObject != null)
+        {
+            poolObject.Deactivate(false);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
