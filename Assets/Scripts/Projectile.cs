@@ -8,9 +8,6 @@ public class Projectile : MonoBehaviour {
 
     Vector3 previousPos;
 
-    public float lifeTime = 5f;
-    float elapsedTime = 0f;
-
 	// Use this for initialization
 	void Start () {
         previousPos = transform.position;
@@ -18,8 +15,7 @@ public class Projectile : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        float tm = Time.deltaTime;
-        transform.position += transform.forward * speed * tm;
+        transform.position += transform.forward * speed * Time.deltaTime;
 
         Vector3 disp = previousPos - transform.position;
         Vector3 dir = disp.normalized;
@@ -30,33 +26,11 @@ public class Projectile : MonoBehaviour {
             Hit();
         }
 
-        if(lifeTime > 0)
-        {
-            elapsedTime += tm;
-            if (elapsedTime >= lifeTime)
-            {
-                DestroyProjectile();
-            }
-        }
-
         previousPos = transform.position;
     }
 
     void Hit()
     {
-        DestroyProjectile();
-    }
-
-    void DestroyProjectile()
-    {
-        PoolObject poolObject = gameObject.GetComponent<PoolObject>();
-        if (poolObject != null)
-        {
-            poolObject.Deactivate(false);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        // TODO: Deal damage to hit object
     }
 }

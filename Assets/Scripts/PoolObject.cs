@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class PoolObject : MonoBehaviour {
 
-    ObjectsPool pool;
+    public ObjectsPool pool;
 
     bool active = false;
-    bool deactivateGameObject = true;
 
-    public float lifeTime = 0f;
-    float time = 0f;
-
-    Transform objectSpawnPoint;
+    float lifeTime = 0f;
+    float elapsedTime = 0f;
 
     // Use this for initialization
     void Start () {
@@ -24,60 +21,53 @@ public class PoolObject : MonoBehaviour {
         // Object has a limited lifetime if lifeTime != 0
         if (active && lifeTime > 0f)
         {
-            time += Time.deltaTime;
+            elapsedTime += Time.deltaTime;
 
-            if (time >= lifeTime)
+            if (elapsedTime >= lifeTime)
             {
-                time = 0f;
+                elapsedTime = 0f;
 
-                Deactivate();   // Return to the pool
+                Deactivate(true);   // Deactivate and return to the pool
             }
         }
 	}
 
-    // Sets the bool and object spawn point
-    public void SetPool(ObjectsPool pool)
-    {
-        this.pool = pool;
-        this.objectSpawnPoint = this.pool.objectSpawnPoint;
-    }
-
-    // Activates the object and moves it to the spawn position. Optionally the GameObject itself can be set active
-    public void Activate(bool activateGameObject)
-    {
-        active = true;
-        gameObject.SetActive(activateGameObject);
-        deactivateGameObject = activateGameObject;
-
-        transform.position = objectSpawnPoint.position;
-        transform.rotation = objectSpawnPoint.rotation;
-    }
-
-    // Auto activate the object and its GameObject
     public void Activate()
     {
-        Activate(true);
+        active = true;
+        elapsedTime = 0f;
+        gameObject.SetActive(true);
     }
 
-    // Deactivates the object and moves it to the pool position. Optionally the GameObject itself can be deactivated
-    public void Deactivate(bool activateGameObject)
+    public void Deactivate(bool returnToPool)
     {
-        active = false;
-        gameObject.SetActive(activateGameObject);
+        if(returnToPool)
+        {
+            pool.InsertObject(this.gameObject);
+        }
 
-        transform.position = pool.transform.position;
-        transform.rotation = pool.transform.rotation;
+        active = false;
+        elapsedTime = 0f;
+        gameObject.SetActive(false);
     }
 
-    // Auto deactivate the object and its GameObject
     public void Deactivate()
     {
-        if (deactivateGameObject)
-        {
-            Deactivate(false);
-        } else
-        {
-            Deactivate(true);
-        }
+        Deactivate(false);
+    }
+
+    public bool IsActive()
+    {
+        return active;
+    }
+
+    public float GetElapsedTime()
+    {
+        return elapsedTime;
+    }
+
+    public void SetLifeTime(float lifeTime)
+    {
+        this.lifeTime = lifeTime;
     }
 }

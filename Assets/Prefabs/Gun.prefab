@@ -52,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1554776510955574}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.326, y: 3.599, z: 3.801}
   m_LocalScale: {x: 0.2, y: 0.3, z: 1}
   m_Children:
   - {fileID: 4281679496657956}
@@ -141,6 +141,7 @@ MonoBehaviour:
   projectile: {fileID: 114618763117483872, guid: 4caaa13d0a405124296eecccf2f86fc4,
     type: 2}
   ammoCapacity: 36
-  auto: 0
-  fireRate: 0.3
+  ammo: 36
+  auto: 1
+  fireRate: 0.1
   reloadRate: 3

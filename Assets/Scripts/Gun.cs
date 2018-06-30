@@ -6,15 +6,15 @@ public class Gun : MonoBehaviour {
 
     public int damage = 10;
 
-    public Projectile projectile;
+    public GameObject projectile;
     ObjectsPool projectilePool;
-    Transform muzzle;
+    public Transform muzzle;
 
     public int ammoCapacity = 6;
     public int ammo = 0;
 
     public bool auto;
-    public float fireRate = 0.1f;
+    public float fireRate = 0.5f;
     float fireTime = 0f;
     bool firing = false;
 
@@ -27,9 +27,22 @@ public class Gun : MonoBehaviour {
         muzzle = transform.Find("Muzzle");
 
         projectilePool = gameObject.AddComponent<ObjectsPool> ();
-        projectilePool.poolObject = projectile.gameObject;
-        projectilePool.poolSize = ammoCapacity;
-        projectilePool.objectSpawnPoint = muzzle;
+        projectilePool.poolObject = projectile;
+        projectilePool.poolObjects = new List<GameObject>();
+        for(int i = 0; i < (int)(ammoCapacity * 1.5f); i++)
+        {
+            GameObject newProjectile = Instantiate(projectile, projectilePool.transform.position, projectilePool.transform.rotation);
+
+            PoolObject newPoolProjectile = newProjectile.GetComponent<PoolObject>();
+            if(newPoolProjectile == null)
+            {
+                newPoolProjectile = newProjectile.AddComponent<PoolObject>();
+            }
+            newPoolProjectile.pool = projectilePool;
+            newPoolProjectile.Deactivate();
+
+            projectilePool.InsertObject(newProjectile);
+        }
     }
 	
 	// Update is called once per frame
@@ -92,9 +105,19 @@ public class Gun : MonoBehaviour {
         firing = true;
         reloading = false;
 
-        ammo -= 1;
         GameObject newProjectile = projectilePool.PeekNextObject();
-        newProjectile.GetComponent<PoolObject>().Activate(true);
+        newProjectile.transform.position = muzzle.position;
+        newProjectile.transform.rotation = muzzle.rotation;
+
+        PoolObject poolProjectileObject = newProjectile.GetComponent<PoolObject>();
+        if(poolProjectileObject == null)
+        {
+            poolProjectileObject = newProjectile.AddComponent<PoolObject>();
+        }
+        poolProjectileObject.Activate();
+        poolProjectileObject.SetLifeTime(5f);
+
+        ammo -= 1;
 
         // TODO: Play fire animation
     }
