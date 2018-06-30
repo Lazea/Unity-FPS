@@ -220,30 +220,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &282840810 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1291933270639116, guid: b0030937136caaa4b800d0dde73fcdc7,
-    type: 2}
-  m_PrefabInternal: {fileID: 115269867}
---- !u!114 &282840811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 282840810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 883d855db862fbb4dac843f2180bb3f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xSensitivity: 75
-  ySensitivity: 60
-  inverted: 0
-  minY: -60
-  maxY: 60
-  clampX: 0
-  minX: -60
-  maxX: 60
 --- !u!1 &573042753
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,7 +231,7 @@ GameObject:
   - component: {fileID: 573042757}
   - component: {fileID: 573042756}
   - component: {fileID: 573042755}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -340,7 +316,7 @@ GameObject:
   - component: {fileID: 693761503}
   - component: {fileID: 693761502}
   - component: {fileID: 693761501}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -425,7 +401,7 @@ GameObject:
   - component: {fileID: 826313403}
   - component: {fileID: 826313402}
   - component: {fileID: 826313401}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,7 +483,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1399030621}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Scene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -543,7 +519,7 @@ GameObject:
   - component: {fileID: 1473336941}
   - component: {fileID: 1473336940}
   - component: {fileID: 1473336939}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -630,7 +606,7 @@ GameObject:
   - component: {fileID: 2121703242}
   - component: {fileID: 2121703241}
   - component: {fileID: 2121703240}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

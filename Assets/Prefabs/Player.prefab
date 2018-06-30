@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 143037008252592410}
   - component: {fileID: 136454595394629050}
   - component: {fileID: 54178334490909804}
+  - component: {fileID: 114453595413741934}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -41,6 +42,7 @@ GameObject:
   - component: {fileID: 4774851266929022}
   - component: {fileID: 20840772824193084}
   - component: {fileID: 81530828165857942}
+  - component: {fileID: 114162333665148084}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -175,6 +177,42 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1291933270639116}
   m_Enabled: 1
+--- !u!114 &114162333665148084
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1291933270639116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 883d855db862fbb4dac843f2180bb3f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xSensitivity: 75
+  ySensitivity: 60
+  inverted: 0
+  minY: -60
+  maxY: 60
+  clampX: 0
+  minX: -60
+  maxX: 60
+--- !u!114 &114453595413741934
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1178223360639820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 761397235bc89094589364148eca6973, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 3
+  runSpeed: 7
+  airSpeed: 1
+  crouchSpeed: 2
+  jumpPower: 6
+  maxFallSpeed: 25
 --- !u!136 &136454595394629050
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -200,8 +238,8 @@ CharacterController:
   serializedVersion: 2
   m_Height: 2
   m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SlopeLimit: 55
+  m_StepOffset: 0.35
+  m_SkinWidth: 0.01
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
