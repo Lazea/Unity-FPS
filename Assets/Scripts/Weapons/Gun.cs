@@ -33,13 +33,15 @@ public class Gun : MonoBehaviour {
         {
             GameObject newProjectile = Instantiate(projectile, projectilePool.transform.position, projectilePool.transform.rotation);
 
-            PoolObject newPoolProjectile = newProjectile.GetComponent<PoolObject>();
-            if(newPoolProjectile == null)
+            PoolProjectile newPoolProjectile = newProjectile.GetComponent<PoolProjectile>();
+            newPoolProjectile.poolObject = newProjectile.GetComponent<PoolObject>();
+            if(newPoolProjectile.poolObject == null)
             {
-                newPoolProjectile = newProjectile.AddComponent<PoolObject>();
+                newPoolProjectile.poolObject = newProjectile.AddComponent<PoolObject>();
             }
-            newPoolProjectile.pool = projectilePool;
-            newPoolProjectile.Deactivate();
+
+            newPoolProjectile.poolObject.pool = projectilePool;
+            newPoolProjectile.poolObject.Deactivate();
 
             projectilePool.InsertObject(newProjectile);
         }
@@ -105,17 +107,20 @@ public class Gun : MonoBehaviour {
         firing = true;
         reloading = false;
 
-        GameObject newProjectile = projectilePool.PeekNextObject();
+        GameObject newProjectile = projectilePool.GetNextObject();
         newProjectile.transform.position = muzzle.position;
         newProjectile.transform.rotation = muzzle.rotation;
 
-        PoolObject poolProjectileObject = newProjectile.GetComponent<PoolObject>();
-        if(poolProjectileObject == null)
-        {
-            poolProjectileObject = newProjectile.AddComponent<PoolObject>();
-        }
-        poolProjectileObject.Activate();
-        poolProjectileObject.SetLifeTime(5f);
+        PoolProjectile poolProjectile = newProjectile.GetComponent<PoolProjectile>();
+        poolProjectile.poolObject.Activate();
+
+        //PoolObject poolProjectileObject = newProjectile.GetComponent<PoolObject>();
+        //if(poolProjectileObject == null)
+        //{
+        //    poolProjectileObject = newProjectile.AddComponent<PoolObject>();
+        //}
+        //poolProjectileObject.Activate();
+        //poolProjectileObject.SetLifeTime(5f);
 
         ammo -= 1;
 

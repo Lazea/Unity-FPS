@@ -8,13 +8,13 @@ public class Projectile : MonoBehaviour {
 
     Vector3 previousPos;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    protected virtual void Start () {
         previousPos = transform.position;
     }
 	
 	// Update is called once per frame
-	void Update () {
+	protected virtual void Update () {
         transform.position += transform.forward * speed * Time.deltaTime;
 
         Vector3 disp = previousPos - transform.position;
@@ -23,14 +23,25 @@ public class Projectile : MonoBehaviour {
         Ray ray = new Ray(transform.position, dir);
         if (Physics.Raycast(ray, distance))
         {
-            Hit();
+            DestroyProjectile();
         }
 
         previousPos = transform.position;
     }
 
-    void Hit()
+    protected virtual void Hit()
+    {
+        DealDamage();
+        DestroyProjectile();
+    }
+
+    protected virtual void DealDamage()
     {
         // TODO: Deal damage to hit object
+    }
+
+    protected virtual void DestroyProjectile()
+    {
+        Destroy(gameObject);
     }
 }
