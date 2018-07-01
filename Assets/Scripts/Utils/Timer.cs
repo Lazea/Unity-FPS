@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Timed : MonoBehaviour {
+public class Timer : MonoBehaviour {
 
     public float lifeTime = 0f;
     float time;
@@ -22,20 +22,31 @@ public class Timed : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(lifeTime > 0)
+        if(Tick())
         {
-            time += Time.deltaTime;
-            if(time >= lifeTime)
+            if (endState == EndState.destroy)
             {
-                time = 0f;
-                if(endState == EndState.destroy)
-                {
-                    Destroy(gameObject);
-                } else
-                {
-                    gameObject.SetActive(false);
-                }
+                Destroy(gameObject);
+            }
+            else
+            {
+                gameObject.SetActive(false);
             }
         }
-	}
+    }
+
+    public bool Tick()
+    {
+        if (lifeTime > 0)
+        {
+            time += Time.deltaTime;
+            if (time >= lifeTime)
+            {
+                time = 0f;
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

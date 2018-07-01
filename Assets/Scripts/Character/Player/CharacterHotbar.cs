@@ -116,6 +116,7 @@ public class CharacterHotbar : MonoBehaviour {
                 index = 0;
             }
 
+            int startIndex = index;
             GameObject item = GetItem(index);
             while (item == null)
             {
@@ -126,6 +127,11 @@ public class CharacterHotbar : MonoBehaviour {
                 }
 
                 item = GetItem(index);
+
+                if (index == startIndex)
+                {
+                    return null;
+                }
             }
 
             return SwitchTo(index);
@@ -144,6 +150,7 @@ public class CharacterHotbar : MonoBehaviour {
                 index = inventory.GetEquiptableItemSlotCount() - 1;
             }
 
+            int startIndex = index;
             GameObject item = GetItem(index);
             while (item == null)
             {
@@ -154,6 +161,11 @@ public class CharacterHotbar : MonoBehaviour {
                 }
 
                 item = GetItem(index);
+
+                if(index == startIndex)
+                {
+                    return null;
+                }
             }
 
             return SwitchTo(index);
@@ -172,11 +184,11 @@ public class CharacterHotbar : MonoBehaviour {
         return inventory.GetItem(index);
     }
 
-    void EquiptItem(GameObject item)
+    public void EquiptItem(GameObject item)
     {
         if (item != null)
         {
-            item.GetComponent<Item>().Pickup();
+            item.GetComponent<Item>().Pickup(this);
             item.SetActive(true);
             item.transform.parent = rightHand;
             item.transform.localPosition = Vector3.zero;
@@ -184,16 +196,20 @@ public class CharacterHotbar : MonoBehaviour {
         }
     }
 
-    void UnequiptItem(GameObject item)
+    public void UnequiptItem(GameObject item)
     {
         if (item != null)
         {
-            item.SetActive(false);
+            if (item == inventory.GetItem(item.GetComponent<Item>().type))
+            {
+                item.SetActive(false);
+            }
         }
     }
 
-    void DropItem(GameObject item)
+    public void DropItem(GameObject item)
     {
-
+        inventory.RemoveItemFromSlot(item.GetComponent<Item>().type);
+        currItem = null;
     }
 }

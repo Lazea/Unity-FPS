@@ -17,9 +17,11 @@ public class Item : MonoBehaviour {
     bool inUse = false;
 
     Rigidbody rb;
-    BoxCollider collider;
+    Collider collider;
 
     public ItemType type;
+
+    CharacterHotbar hotbar;
 
 	// Use this for initialization
 	void Start () {
@@ -29,7 +31,7 @@ public class Item : MonoBehaviour {
             rb = gameObject.AddComponent<Rigidbody>();
         }
 
-        collider = gameObject.GetComponent<BoxCollider>();
+        collider = gameObject.GetComponent<Collider>();
     }
 	
 	// Update is called once per frame
@@ -53,14 +55,20 @@ public class Item : MonoBehaviour {
         }
 	}
 
-    public void Pickup()
+    public void Pickup(CharacterHotbar hotbar)
     {
+        this.hotbar = hotbar;
         inUse = true;
     }
 
     public void Drop()
     {
-        inUse = false;
+        if (hotbar != null)
+        {
+            hotbar.DropItem(this.gameObject);
+            hotbar = null;
+            inUse = false;
+        }
     }
 
     public bool IsInUse()

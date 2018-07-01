@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 33243779499931548}
   - component: {fileID: 23831472419072660}
   - component: {fileID: 65673127390393352}
-  - component: {fileID: 114842291587074160}
+  - component: {fileID: 114647895501367218}
   - component: {fileID: 114181375286352192}
   m_Layer: 11
   m_Name: Pistol
@@ -201,6 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 35
+  item: {fileID: 0}
   projectile: {fileID: 1234655561272908, guid: 4caaa13d0a405124296eecccf2f86fc4, type: 2}
   muzzle: {fileID: 4863209867185284}
   ammoCapacity: 12
@@ -208,7 +209,7 @@ MonoBehaviour:
   auto: 0
   fireRate: 0.3
   reloadRate: 3
---- !u!114 &114842291587074160
+--- !u!114 &114647895501367218
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

@@ -58,6 +58,8 @@ public class CharacterInventory : MonoBehaviour {
 
     const ItemType itemSlotType = ItemType.genericItem;
 
+    CharacterHotbar hotbar;
+
     // Use this for initialization
     void Awake () {
         itemSlotCount = 1;
@@ -151,11 +153,13 @@ public class CharacterInventory : MonoBehaviour {
     public void RemoveItemFromSlot(int index)
     {
         itemSlots[index].RemoveItem();
+        itemCount -= 1;
     }
 
     public void RemoveItemFromSlot(ItemType slotType)
     {
         int index = TypeToIndex(slotType);
+        RemoveItemFromSlot(index);
     }
 
     public ItemSlot GetItemSlot(int index)

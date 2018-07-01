@@ -47,6 +47,7 @@ public class ItemPickup : MonoBehaviour {
             if (pickup && closestItem != null)
             {
                 ItemType itemType = closestItem.GetComponent<Item>().type;
+                closestItem.GetComponent<Item>().Pickup(hotbar);
                 inventory.AddItemToSlot(itemType, closestItem);
                 hotbar.SwitchTo(inventory.TypeToIndex(itemType));
             }

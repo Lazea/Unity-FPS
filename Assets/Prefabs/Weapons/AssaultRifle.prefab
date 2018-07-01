@@ -201,6 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 25
+  item: {fileID: 0}
   projectile: {fileID: 1234655561272908, guid: 4caaa13d0a405124296eecccf2f86fc4, type: 2}
   muzzle: {fileID: 4998206673926402}
   ammoCapacity: 36

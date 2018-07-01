@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : MonoBehaviour {
-
-    public int damage = 10;
+public class Gun : Weapon {
 
     public GameObject projectile;
     ObjectsPool projectilePool;
@@ -24,7 +22,9 @@ public class Gun : MonoBehaviour {
     bool reloading = false;
 
 	// Use this for initialization
-	void Start () {
+	protected override void Start () {
+        base.Start();
+
         muzzle = transform.Find("Muzzle");
         muzzleFlash = muzzle.Find("Muzzle Flash");
         SetActiveMuzzleFlash(false);
@@ -49,16 +49,15 @@ public class Gun : MonoBehaviour {
             projectilePool.InsertObject(newProjectile);
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
-        // Input
-        bool fire = Input.GetMouseButtonDown(0);
-        if (auto)
-        {
-            fire = Input.GetMouseButton(0);
-        }
 
+    // Update is called once per frame
+    protected override void Update () {
+        base.Update();
+
+        if(auto)
+        {
+            fire = fireHold;
+        }
         bool reload = Input.GetKeyDown(KeyCode.R);
 
         // Reload and fire logic
@@ -105,7 +104,7 @@ public class Gun : MonoBehaviour {
         }
 	}
 
-    void Fire()
+    protected override void Fire()
     {
         firing = true;
         reloading = false;
