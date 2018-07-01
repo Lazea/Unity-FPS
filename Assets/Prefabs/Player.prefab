@@ -25,6 +25,8 @@ GameObject:
   - component: {fileID: 136454595394629050}
   - component: {fileID: 54178334490909804}
   - component: {fileID: 114453595413741934}
+  - component: {fileID: 114401147304058590}
+  - component: {fileID: 114981651394545186}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -59,7 +61,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4257318285244036}
   m_Layer: 0
-  m_Name: LeftHand
+  m_Name: Left Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +76,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4487354987496576}
   m_Layer: 0
-  m_Name: RightHand
+  m_Name: Right Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,6 +256,27 @@ MonoBehaviour:
   clampX: 0
   minX: -60
   maxX: 60
+--- !u!114 &114401147304058590
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1178223360639820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b958282aa5b1643a357fbae812f4e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemSlots: []
+  itemCount: 0
+  primaryWeapon: {fileID: 1160050237240174, guid: 1705d3eb9de52744e9ce34fbb54aa21d,
+    type: 2}
+  secondaryWeapon: {fileID: 1728555237918840, guid: a93cf59be3aa7d247849cc7c023275a0,
+    type: 2}
+  sidearmWeapon: {fileID: 1086196289147846, guid: 05a27cbc0513c994dad590dc50019a77,
+    type: 2}
+  meleeWeapon: {fileID: 0}
+  throwable: {fileID: 0}
 --- !u!114 &114453595413741934
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -271,6 +294,19 @@ MonoBehaviour:
   crouchSpeed: 2
   jumpPower: 6
   maxFallSpeed: 25
+--- !u!114 &114981651394545186
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1178223360639820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99635534b304ce245a0dfc72fa0abba7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightHand: {fileID: 4487354987496576}
+  leftHand: {fileID: 4257318285244036}
 --- !u!136 &136454595394629050
 CapsuleCollider:
   m_ObjectHideFlags: 1

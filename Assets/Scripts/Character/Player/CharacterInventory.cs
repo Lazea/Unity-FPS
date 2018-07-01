@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public struct ItemSlot
 {
     public int index;
@@ -33,58 +34,97 @@ public struct ItemSlot
 public class CharacterInventory : MonoBehaviour {
 
     int itemSlotCount;
-    int genericItemSlotIndexOffset;
-    ItemSlot[] itemSlots;
+    int equiptableItemSlotCount;
+    public ItemSlot[] itemSlots;
 
-    int itemCount;
+    public int itemCount;
     bool inventoryFull = false;
 
+    public GameObject primaryWeapon;
     ItemSlot primaryWeaponSlot;
     const string primaryWeaponSlotName = "Primary";
+    public GameObject secondaryWeapon;
     ItemSlot secondaryWeaponSlot;
     const string secondaryWeaponSlotName = "Secondary";
+    public GameObject sidearmWeapon;
     ItemSlot sidearmWeaponSlot;
     const string sidearmWeaponSlotName = "Sidearm";
+    public GameObject meleeWeapon;
     ItemSlot meleeWeaponSlot;
     const string meleeWeaponSlotName = "Melee Weapon";
+    public GameObject throwable;
     ItemSlot throwableSlot;
     const string throwableSlotName = "Throwable Item";
 
-    ItemSlot currItemSlot;
-
     // Use this for initialization
-    void Start () {
-        genericItemSlotIndexOffset = 5;
-        itemSlots = new ItemSlot[genericItemSlotIndexOffset + itemSlotCount];
+    void Awake () {
+        itemSlotCount = 1;
+        equiptableItemSlotCount = 5;
+        itemSlots = new ItemSlot[equiptableItemSlotCount + itemSlotCount];
+
+        itemCount = 0;
 
         primaryWeaponSlot = new ItemSlot(0);
         primaryWeaponSlot.slotName = primaryWeaponSlotName;
+        if(primaryWeapon != null)
+        {
+            primaryWeapon = Instantiate(primaryWeapon, transform.position, transform.rotation, transform);
+            primaryWeapon.SetActive(false);
+            primaryWeaponSlot.AddItem(primaryWeapon.name, primaryWeapon);
+            itemCount += 1;
+        }
         itemSlots[0] = primaryWeaponSlot;
 
         secondaryWeaponSlot = new ItemSlot(1);
         secondaryWeaponSlot.slotName = secondaryWeaponSlotName;
+        if (secondaryWeapon != null)
+        {
+            secondaryWeapon = Instantiate(secondaryWeapon, transform.position, transform.rotation, transform);
+            secondaryWeapon.SetActive(false);
+            secondaryWeaponSlot.AddItem(secondaryWeapon.name, secondaryWeapon);
+            itemCount += 1;
+        }
         itemSlots[1] = secondaryWeaponSlot;
 
         sidearmWeaponSlot = new ItemSlot(2);
         sidearmWeaponSlot.slotName = sidearmWeaponSlotName;
+        if (sidearmWeapon != null)
+        {
+            sidearmWeapon = Instantiate(sidearmWeapon, transform.position, transform.rotation, transform);
+            sidearmWeapon.SetActive(false);
+            sidearmWeaponSlot.AddItem(sidearmWeapon.name, sidearmWeapon);
+            itemCount += 1;
+        }
         itemSlots[2] = sidearmWeaponSlot;
 
         meleeWeaponSlot = new ItemSlot(3);
         meleeWeaponSlot.slotName = meleeWeaponSlotName;
+        if (meleeWeapon != null)
+        {
+            meleeWeapon = Instantiate(meleeWeapon, transform.position, transform.rotation, transform);
+            meleeWeapon.SetActive(false);
+            meleeWeaponSlot.AddItem(meleeWeapon.name, meleeWeapon);
+            itemCount += 1;
+        }
         itemSlots[3] = meleeWeaponSlot;
 
         throwableSlot = new ItemSlot(4);
         throwableSlot.slotName = throwableSlotName;
+        if (throwable != null)
+        {
+            throwable = Instantiate(throwable, transform.position, transform.rotation, transform);
+            throwable.SetActive(false);
+            throwableSlot.AddItem(throwable.name, throwable);
+            itemCount += 1;
+        }
         itemSlots[4] = throwableSlot;
 
-        for (int i = genericItemSlotIndexOffset; i < (genericItemSlotIndexOffset + itemSlotCount); i++)
+        for (int i = equiptableItemSlotCount; i < (equiptableItemSlotCount + itemSlotCount); i++)
         {
             ItemSlot newItemSlot = new ItemSlot(i);
             newItemSlot.slotName = string.Format("Item {0}", i);
             itemSlots[i] = newItemSlot;
         }
-
-        itemCount = 0;
     }
 	
 	// Update is called once per frame
@@ -153,7 +193,7 @@ public class CharacterInventory : MonoBehaviour {
             case throwableSlotName:
                 return 4;
             default:
-                for (int i = genericItemSlotIndexOffset; i < (genericItemSlotIndexOffset + itemSlotCount); i++)
+                for (int i = equiptableItemSlotCount; i < (equiptableItemSlotCount + itemSlotCount); i++)
                 {
                     if(GetItemSlot(i).slotName == slotName)
                     {
@@ -163,5 +203,15 @@ public class CharacterInventory : MonoBehaviour {
 
                 return -1;
         }
+    }
+
+    public int GetItemSlotCount()
+    {
+        return itemSlotCount;
+    }
+
+    public int GetEquiptableItemSlotCount()
+    {
+        return equiptableItemSlotCount;
     }
 }

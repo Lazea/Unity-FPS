@@ -143,5 +143,5 @@ MonoBehaviour:
   ammoCapacity: 6
   ammo: 6
   auto: 0
-  fireRate: 5
+  fireRate: 3
   reloadRate: 3

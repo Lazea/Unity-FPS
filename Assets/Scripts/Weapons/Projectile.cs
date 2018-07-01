@@ -6,27 +6,22 @@ public class Projectile : MonoBehaviour {
 
     public float speed = 100f;
 
-    Vector3 previousPos;
-
     // Use this for initialization
     protected virtual void Start () {
-        previousPos = transform.position;
+
     }
 	
 	// Update is called once per frame
 	protected virtual void Update () {
-        transform.position += transform.forward * speed * Time.deltaTime;
+        float distance = speed * Time.deltaTime;
+        transform.position += transform.forward * distance;
 
-        Vector3 disp = previousPos - transform.position;
-        Vector3 dir = disp.normalized;
-        float distance = disp.magnitude;
-        Ray ray = new Ray(transform.position, dir);
+        Ray ray = new Ray(transform.position, -transform.forward);
         if (Physics.Raycast(ray, distance))
         {
+            Debug.Log(ray);
             DestroyProjectile();
         }
-
-        previousPos = transform.position;
     }
 
     protected virtual void Hit()
