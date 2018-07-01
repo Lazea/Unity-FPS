@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114453595413741934}
   - component: {fileID: 114401147304058590}
   - component: {fileID: 114981651394545186}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,14 +267,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b958282aa5b1643a357fbae812f4e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSlots: []
-  itemCount: 0
-  primaryWeapon: {fileID: 1160050237240174, guid: 1705d3eb9de52744e9ce34fbb54aa21d,
-    type: 2}
-  secondaryWeapon: {fileID: 1728555237918840, guid: a93cf59be3aa7d247849cc7c023275a0,
-    type: 2}
-  sidearmWeapon: {fileID: 1086196289147846, guid: 05a27cbc0513c994dad590dc50019a77,
-    type: 2}
+  primaryWeapon: {fileID: 0}
+  secondaryWeapon: {fileID: 0}
+  sidearmWeapon: {fileID: 0}
   meleeWeapon: {fileID: 0}
   throwable: {fileID: 0}
 --- !u!114 &114453595413741934
@@ -305,6 +300,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99635534b304ce245a0dfc72fa0abba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currSlotIndex: 0
+  prevSlotIndex: 1
   rightHand: {fileID: 4487354987496576}
   leftHand: {fileID: 4257318285244036}
 --- !u!136 &136454595394629050

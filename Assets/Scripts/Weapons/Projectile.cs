@@ -19,7 +19,6 @@ public class Projectile : MonoBehaviour {
         Ray ray = new Ray(transform.position, -transform.forward);
         if (Physics.Raycast(ray, distance))
         {
-            Debug.Log(ray);
             DestroyProjectile();
         }
     }

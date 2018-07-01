@@ -114,14 +114,6 @@ public class Gun : MonoBehaviour {
         PoolProjectile poolProjectile = newProjectile.GetComponent<PoolProjectile>();
         poolProjectile.poolObject.Activate();
 
-        //PoolObject poolProjectileObject = newProjectile.GetComponent<PoolObject>();
-        //if(poolProjectileObject == null)
-        //{
-        //    poolProjectileObject = newProjectile.AddComponent<PoolObject>();
-        //}
-        //poolProjectileObject.Activate();
-        //poolProjectileObject.SetLifeTime(5f);
-
         ammo -= 1;
 
         // TODO: Play fire animation

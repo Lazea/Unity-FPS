@@ -36,7 +36,10 @@ public class CharacterHotbar : MonoBehaviour {
         prevSlotIndex = 1;
 
         currItem = inventory.GetItem(currSlotIndex);
-        EquiptItem(currItem);
+        if(currItem != null)
+        {
+            EquiptItem(currItem);
+        }
     }
 
     // Update is called once per frame
@@ -105,7 +108,7 @@ public class CharacterHotbar : MonoBehaviour {
 
     public GameObject SwitchToNext()
     {
-        if (inventory.GetEquiptableItemSlotCount() > 0)
+        if (inventory.GetItemCount() > 0)
         {
             int index = currSlotIndex + 1;
             if (index >= inventory.GetEquiptableItemSlotCount())
@@ -133,7 +136,7 @@ public class CharacterHotbar : MonoBehaviour {
 
     public GameObject SwitchToPrev()
     {
-        if (inventory.GetEquiptableItemSlotCount() > 0)
+        if (inventory.GetItemCount() > 0)
         {
             int index = currSlotIndex - 1;
             if (index < 0)
@@ -171,7 +174,6 @@ public class CharacterHotbar : MonoBehaviour {
 
     void EquiptItem(GameObject item)
     {
-        Debug.Log("Equipt: " + item);
         item.SetActive(true);
         item.transform.parent = rightHand;
         item.transform.localPosition = Vector3.zero;
@@ -180,7 +182,6 @@ public class CharacterHotbar : MonoBehaviour {
 
     void UnequiptItem(GameObject item)
     {
-        Debug.Log("Unequipt: " + item);
         item.SetActive(false);
     }
 

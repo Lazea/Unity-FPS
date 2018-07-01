@@ -22,10 +22,11 @@ GameObject:
   - component: {fileID: 33814491483902504}
   - component: {fileID: 23779849707443644}
   - component: {fileID: 65371665342748548}
+  - component: {fileID: 114989965237461794}
   - component: {fileID: 114355057156677872}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: AssaultRifle
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1160050237240174}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -4.13, y: 0.61, z: 10.5}
   m_LocalScale: {x: 0.2, y: 0.3, z: 1}
   m_Children:
   - {fileID: 4998206673926402}
@@ -145,3 +146,14 @@ MonoBehaviour:
   auto: 1
   fireRate: 0.1
   reloadRate: 3
+--- !u!114 &114989965237461794
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1160050237240174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38463252cf488b4187553549dd4b193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

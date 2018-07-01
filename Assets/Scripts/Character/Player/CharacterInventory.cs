@@ -35,9 +35,9 @@ public class CharacterInventory : MonoBehaviour {
 
     int itemSlotCount;
     int equiptableItemSlotCount;
-    public ItemSlot[] itemSlots;
+    ItemSlot[] itemSlots;
 
-    public int itemCount;
+    int itemCount;
     bool inventoryFull = false;
 
     public GameObject primaryWeapon;
@@ -203,6 +203,11 @@ public class CharacterInventory : MonoBehaviour {
 
                 return -1;
         }
+    }
+
+    public int GetItemCount()
+    {
+        return itemCount;
     }
 
     public int GetItemSlotCount()

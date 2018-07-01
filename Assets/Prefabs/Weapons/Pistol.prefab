@@ -37,10 +37,11 @@ GameObject:
   - component: {fileID: 33243779499931548}
   - component: {fileID: 23831472419072660}
   - component: {fileID: 65673127390393352}
+  - component: {fileID: 114842291587074160}
   - component: {fileID: 114181375286352192}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Pistol
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65,7 +66,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1086196289147846}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.036}
+  m_LocalPosition: {x: -0.8, y: 0.8, z: 11.753964}
   m_LocalScale: {x: 0.15167, y: 0.210548, z: 0.39220214}
   m_Children:
   - {fileID: 4863209867185284}
@@ -145,3 +146,14 @@ MonoBehaviour:
   auto: 0
   fireRate: 0.3
   reloadRate: 3
+--- !u!114 &114842291587074160
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1086196289147846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38463252cf488b4187553549dd4b193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
