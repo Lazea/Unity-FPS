@@ -9,10 +9,14 @@ public class ItemPickup : MonoBehaviour {
 
     bool pickup;
 
+    CharacterInventory inventory;
+    CharacterHotbar hotbar;
+
 	// Use this for initialization
 	void Start () {
-		
-	}
+        inventory = gameObject.GetComponent<CharacterInventory>();
+        hotbar = gameObject.GetComponent<CharacterHotbar>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -42,7 +46,9 @@ public class ItemPickup : MonoBehaviour {
 
             if (pickup && closestItem != null)
             {
-                Debug.Log("Pickup " + closestItem.name);
+                ItemType itemType = closestItem.GetComponent<Item>().type;
+                inventory.AddItemToSlot(itemType, closestItem);
+                hotbar.SwitchTo(inventory.TypeToIndex(itemType));
             }
         }
     }

@@ -6,14 +6,14 @@ using UnityEngine;
 public struct ItemSlot
 {
     public int index;
-    public string slotName;
+    public ItemType slotType;
     public string itemName;
     public GameObject item;
 
-    public ItemSlot(int index)
+    public ItemSlot(int index, ItemType slotType)
     {
         this.index = index;
-        slotName = "";
+        this.slotType = slotType;
         itemName = "";
         item = null;
     }
@@ -35,26 +35,28 @@ public class CharacterInventory : MonoBehaviour {
 
     int itemSlotCount;
     int equiptableItemSlotCount;
-    ItemSlot[] itemSlots;
+    public ItemSlot[] itemSlots;
 
     int itemCount;
     bool inventoryFull = false;
 
     public GameObject primaryWeapon;
     ItemSlot primaryWeaponSlot;
-    const string primaryWeaponSlotName = "Primary";
+    const ItemType primaryWeaponSlotType = ItemType.primaryWeapon;
     public GameObject secondaryWeapon;
     ItemSlot secondaryWeaponSlot;
-    const string secondaryWeaponSlotName = "Secondary";
+    const ItemType secondaryWeaponSlotType = ItemType.secondaryWeapon;
     public GameObject sidearmWeapon;
     ItemSlot sidearmWeaponSlot;
-    const string sidearmWeaponSlotName = "Sidearm";
+    const ItemType sidearmWeaponSlotType = ItemType.sidearmWeapon;
     public GameObject meleeWeapon;
     ItemSlot meleeWeaponSlot;
-    const string meleeWeaponSlotName = "Melee Weapon";
+    const ItemType meleeWeaponSlotType = ItemType.meleeWeapon;
     public GameObject throwable;
     ItemSlot throwableSlot;
-    const string throwableSlotName = "Throwable Item";
+    const ItemType throwableSlotType = ItemType.throwable;
+
+    const ItemType itemSlotType = ItemType.genericItem;
 
     // Use this for initialization
     void Awake () {
@@ -64,8 +66,7 @@ public class CharacterInventory : MonoBehaviour {
 
         itemCount = 0;
 
-        primaryWeaponSlot = new ItemSlot(0);
-        primaryWeaponSlot.slotName = primaryWeaponSlotName;
+        primaryWeaponSlot = new ItemSlot(0, primaryWeaponSlotType);
         if(primaryWeapon != null)
         {
             primaryWeapon = Instantiate(primaryWeapon, transform.position, transform.rotation, transform);
@@ -75,8 +76,7 @@ public class CharacterInventory : MonoBehaviour {
         }
         itemSlots[0] = primaryWeaponSlot;
 
-        secondaryWeaponSlot = new ItemSlot(1);
-        secondaryWeaponSlot.slotName = secondaryWeaponSlotName;
+        secondaryWeaponSlot = new ItemSlot(1, secondaryWeaponSlotType);
         if (secondaryWeapon != null)
         {
             secondaryWeapon = Instantiate(secondaryWeapon, transform.position, transform.rotation, transform);
@@ -86,8 +86,7 @@ public class CharacterInventory : MonoBehaviour {
         }
         itemSlots[1] = secondaryWeaponSlot;
 
-        sidearmWeaponSlot = new ItemSlot(2);
-        sidearmWeaponSlot.slotName = sidearmWeaponSlotName;
+        sidearmWeaponSlot = new ItemSlot(2, sidearmWeaponSlotType);
         if (sidearmWeapon != null)
         {
             sidearmWeapon = Instantiate(sidearmWeapon, transform.position, transform.rotation, transform);
@@ -97,8 +96,7 @@ public class CharacterInventory : MonoBehaviour {
         }
         itemSlots[2] = sidearmWeaponSlot;
 
-        meleeWeaponSlot = new ItemSlot(3);
-        meleeWeaponSlot.slotName = meleeWeaponSlotName;
+        meleeWeaponSlot = new ItemSlot(3, meleeWeaponSlotType);
         if (meleeWeapon != null)
         {
             meleeWeapon = Instantiate(meleeWeapon, transform.position, transform.rotation, transform);
@@ -108,8 +106,7 @@ public class CharacterInventory : MonoBehaviour {
         }
         itemSlots[3] = meleeWeaponSlot;
 
-        throwableSlot = new ItemSlot(4);
-        throwableSlot.slotName = throwableSlotName;
+        throwableSlot = new ItemSlot(4, throwableSlotType);
         if (throwable != null)
         {
             throwable = Instantiate(throwable, transform.position, transform.rotation, transform);
@@ -121,8 +118,7 @@ public class CharacterInventory : MonoBehaviour {
 
         for (int i = equiptableItemSlotCount; i < (equiptableItemSlotCount + itemSlotCount); i++)
         {
-            ItemSlot newItemSlot = new ItemSlot(i);
-            newItemSlot.slotName = string.Format("Item {0}", i);
+            ItemSlot newItemSlot = new ItemSlot(i, itemSlotType);
             itemSlots[i] = newItemSlot;
         }
     }
@@ -139,16 +135,16 @@ public class CharacterInventory : MonoBehaviour {
             itemSlots[index].AddItem("", item);
 
             itemCount += 1;
-            if (itemCount >= itemSlotCount)
+            if (itemCount >= equiptableItemSlotCount)
             {
                 inventoryFull = true;
             }
         }
     }
 
-    public void AddItemToNamedSlot(string slotName, GameObject item)
+    public void AddItemToSlot(ItemType slotType, GameObject item)
     {
-        int index = NameToIndex(slotName);
+        int index = TypeToIndex(slotType);
         AddItemToSlot(index, item);
     }
 
@@ -157,9 +153,9 @@ public class CharacterInventory : MonoBehaviour {
         itemSlots[index].RemoveItem();
     }
 
-    public void RemoveItemFromNamedSlot(string slotName)
+    public void RemoveItemFromSlot(ItemType slotType)
     {
-        int index = NameToIndex(slotName);
+        int index = TypeToIndex(slotType);
     }
 
     public ItemSlot GetItemSlot(int index)
@@ -172,30 +168,30 @@ public class CharacterInventory : MonoBehaviour {
         return GetItemSlot(index).item;
     }
 
-    public GameObject GetItem(string slotName)
+    public GameObject GetItem(ItemType slotType)
     {
-        int index = NameToIndex(slotName);
+        int index = TypeToIndex(slotType);
         return GetItem(index);
     }
 
-    int NameToIndex(string slotName)
+    public int TypeToIndex(ItemType slotType)
     {
-        switch (slotName)
+        switch (slotType)
         {
-            case primaryWeaponSlotName:
+            case ItemType.primaryWeapon:
                 return 0;
-            case secondaryWeaponSlotName:
+            case ItemType.secondaryWeapon:
                 return 1;
-            case sidearmWeaponSlotName:
+            case ItemType.sidearmWeapon:
                 return 2;
-            case meleeWeaponSlotName:
+            case ItemType.meleeWeapon:
                 return 3;
-            case throwableSlotName:
+            case ItemType.throwable:
                 return 4;
             default:
                 for (int i = equiptableItemSlotCount; i < (equiptableItemSlotCount + itemSlotCount); i++)
                 {
-                    if(GetItemSlot(i).slotName == slotName)
+                    if(GetItemSlot(i).slotType == slotType)
                     {
                         return i;
                     }

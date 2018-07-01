@@ -2,12 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ItemType
+{
+    primaryWeapon,
+    secondaryWeapon,
+    sidearmWeapon,
+    meleeWeapon,
+    throwable,
+    genericItem
+}
+
 public class Item : MonoBehaviour {
 
     bool inUse = false;
 
     Rigidbody rb;
     BoxCollider collider;
+
+    public ItemType type;
 
 	// Use this for initialization
 	void Start () {

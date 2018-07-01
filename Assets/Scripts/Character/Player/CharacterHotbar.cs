@@ -93,7 +93,7 @@ public class CharacterHotbar : MonoBehaviour {
             {
                 UnequiptItem(currItem);
                 EquiptItem(item);
-
+                
                 currItem = item;
 
                 prevSlotIndex = currSlotIndex;
@@ -174,15 +174,22 @@ public class CharacterHotbar : MonoBehaviour {
 
     void EquiptItem(GameObject item)
     {
-        item.SetActive(true);
-        item.transform.parent = rightHand;
-        item.transform.localPosition = Vector3.zero;
-        item.transform.localRotation = Quaternion.identity;
+        if (item != null)
+        {
+            item.GetComponent<Item>().Pickup();
+            item.SetActive(true);
+            item.transform.parent = rightHand;
+            item.transform.localPosition = Vector3.zero;
+            item.transform.localRotation = Quaternion.identity;
+        }
     }
 
     void UnequiptItem(GameObject item)
     {
-        item.SetActive(false);
+        if (item != null)
+        {
+            item.SetActive(false);
+        }
     }
 
     void DropItem(GameObject item)

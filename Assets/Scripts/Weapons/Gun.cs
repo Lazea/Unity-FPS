@@ -9,6 +9,7 @@ public class Gun : MonoBehaviour {
     public GameObject projectile;
     ObjectsPool projectilePool;
     public Transform muzzle;
+    Transform muzzleFlash;
 
     public int ammoCapacity = 6;
     public int ammo = 0;
@@ -25,6 +26,8 @@ public class Gun : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         muzzle = transform.Find("Muzzle");
+        muzzleFlash = muzzle.Find("Muzzle Flash");
+        SetActiveMuzzleFlash(false);
 
         projectilePool = gameObject.AddComponent<ObjectsPool> ();
         projectilePool.poolObject = projectile;
@@ -107,6 +110,8 @@ public class Gun : MonoBehaviour {
         firing = true;
         reloading = false;
 
+        SetActiveMuzzleFlash(true);
+
         GameObject newProjectile = projectilePool.GetNextObject();
         newProjectile.transform.position = muzzle.position;
         newProjectile.transform.rotation = muzzle.rotation;
@@ -125,5 +130,13 @@ public class Gun : MonoBehaviour {
         firing = false;
 
         // TODO: Play reload animation
+    }
+
+    void SetActiveMuzzleFlash(bool active)
+    {
+        if (muzzleFlash != null)
+        {
+            muzzleFlash.gameObject.SetActive(active);
+        }
     }
 }
